@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nahid Pro | bangla to english translation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #050505;
+            --card: #111111;
+            --gold: #ffcc00;
+            --white: #ffffff;
+            --border: #222;
+            --whatsapp: #25D366;
+            --messenger: #0084FF;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* World Clock Bar */
+        .clock-bar {
+            background: #000;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            font-size: 11px;
+            border-bottom: 1px solid var(--border);
+            color: #888;
+        }
+        .clock-bar b { color: var(--gold); }
+
+        .header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--gold);
+            position: relative;
+            background: #000;
+        }
+        .corner-logo {
+            position: absolute;
+            top: 15px; left: 15px;
+            width: 42px; border: 1px solid var(--gold);
+            border-radius: 6px; padding: 2px;
+        }
+
+        .app-container {
+            width: 94%;
+            max-width: 580px;
+            margin: 20px auto;
+            background: var(--card);
+            padding: 20px;
+            border-radius: 25px;
+            border: 1px solid var(--border);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.9);
+        }
+
+        /* Two-Side Language Controls */
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #1a1a1a;
+            padding: 10px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #333;
+        }
+        select {
+            background: transparent;
+            color: white;
+            border: none;
+            outline: none;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            width: 40%;
+        }
+        .swap-icon {
+            color: var(--gold);
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .swap-icon:hover { transform: scale(1.2) rotate(180deg); }
+
+        textarea {
+            width: 100%; height: 120px;
+            background: #000; border: 1px solid var(--border);
+            border-radius: 15px; padding: 15px;
+            color: white; font-size: 17px;
+            outline: none; resize: none; box-sizing: border-box;
+            transition: 0.3s;
+        }
+        textarea:focus { border-color: var(--gold); }
+
+        .live-save {
+            font-size: 12px; color: #555; font-style: italic;
+            margin: 10px 0; min-height: 15px;
+        }
+
+        .output-box {
+            background: #0a0a0a;
+            border: 1px dashed var(--gold);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 10px;
+            color: var(--gold);
+            font-size: 19px;
+            min-height: 70px;
+            line-height: 1.6;
+        }
+        .rtl { direction: rtl; text-align: right; }
+
+        .btn-group { display: flex; gap: 10px; margin-top: 20px; }
+        .btn {
+            flex: 1; padding: 12px; border-radius: 10px; border: none;
+            font-weight: bold; cursor: pointer; display: flex;
+            align-items: center; justify-content: center; gap: 8px;
+            text-transform: uppercase; font-size: 12px;
+        }
+        .btn-copy { background: var(--gold); color: #000; }
+        .btn-listen { background: #333; color: #fff; }
+
+        .social-share {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 10px; margin-top: 20px;
+        }
+        .social-btn {
+            padding: 12px; border-radius: 10px; border: none;
+            color: white; font-size: 11px; font-weight: bold;
+            cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px;
+        }
+
+        .footer-imgs {
+            display: flex; justify-content: center; align-items: center;
+            gap: 15px; margin: 30px 0;
+        }
+        .footer-imgs img { max-height: 40px; border-radius: 5px; opacity: 0.8; }
+
+        footer {
+            background: #000; padding: 30px 5%; text-align: center;
+            font-size: 11px; color: #444; border-top: 1px solid #111;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="clock-bar">
+        <span><b>BD:</b> <span id="bd-time">00:00:00</span></span>
+        <span><b>CAN:</b> <span id="can-time">00:00:00</span></span>
+        <span><b>AUS:</b> <span id="aus-time">00:00:00</span></span>
+    </div>
+
+    <header class="header">
+        <img src="https://uploads.onecompiler.io/44db59mje/44db96dmr/1000207238.png" class="corner-logo">
+        <h1 style="margin:0; font-size: 20px; color: var(--gold);">bangla to english translation</h1>
+    </header>
+
+    <div class="app-container">
+        <div class="language-switcher">
+            <select id="fromLang">
+                <option value="bn">Bengali (বাংলা)</option>
+                <option value="en">English (ইংরেজি)</option>
+                <option value="ar">Arabic (আরবি)</option>
+                <option value="ur">Urdu (পাকিস্তান)</option>
+                <option value="hi">Hindi (হিন্দি)</option>
+            </select>
+            
+            <i class="fas fa-exchange-alt swap-icon" onclick="swap()"></i>
+            
+            <select id="toLang">
+                <option value="en" selected>English (ইংরেজি)</option>
+                <option value="bn">Bengali (বাংলা)</option>
+                <option value="ar">Arabic (আরবি)</option>
+                <option value="ur">Urdu (পাকিস্তান)</option>
+                <option value="hi">Hindi (হিন্দি)</option>
+            </select>
+        </div>
+
+        <textarea id="inputText" placeholder="এখানে টাইপ করুন..."></textarea>
+        
+        <div class="live-save" id="liveSave">টাইপিং লাইভ...</div>
+
+        <div class="output-box" id="outputText">অনুবাদ...</div>
+
+        <div class="btn-group">
+            <button class="btn btn-listen" onclick="speak()"><i class="fas fa-volume-up"></i> Listen</button>
+            <button class="btn btn-copy" onclick="copy()"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+
+        <div class="social-share">
+            <button class="social-btn" style="background:var(--whatsapp)" onclick="share('wa')">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </button>
+            <button class="social-btn" style="background:var(--messenger)" onclick="share('ms')">
+                <i class="fab fa-facebook-messenger"></i> Messenger
+            </button>
+            <button class="social-btn" style="background:#2F80ED" onclick="share('imo')">
+                <i class="fas fa-share-alt"></i> IMO / All
+            </button>
+        </div>
+    </div>
+
+    <div class="footer-imgs">
+        <img src="https://uploads.onecompiler.io/44db59mje/44db4m5ad/1000207497.png">
+        <img src="https://uploads.onecompiler.io/44db59mje/44db4m5ad/1000207496.png">
+        <img src="https://uploads.onecompiler.io/449d687rt/44db4m5ad/1000207495.gif">
+    </div>
+
+    <footer>
+        <p><strong>Milan Hossain Nahid</strong> | Pro Translation Service 2026</p>
+        <p>© Nahid.bangla.to.english.com | All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const input = document.getElementById('inputText');
+        const output = document.getElementById('outputText');
+        const liveSave = document.getElementById('liveSave');
+        const fromL = document.getElementById('fromLang');
+        const toL = document.getElementById('toLang');
+        let timer;
+
+        // ওয়ার্ল্ড ক্লক
+        function clock() {
+            const opt = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+            document.getElementById('bd-time').innerText = new Date().toLocaleString('en-US', { ...opt, timeZone: 'Asia/Dhaka' });
+            document.getElementById('can-time').innerText = new Date().toLocaleString('en-US', { ...opt, timeZone: 'America/Toronto' });
+            document.getElementById('aus-time').innerText = new Date().toLocaleString('en-US', { ...opt, timeZone: 'Australia/Sydney' });
+        }
+        setInterval(clock, 1000);
+        clock();
+
+        // লাইভ টাইপিং ও অনুবাদ
+        input.addEventListener('input', () => {
+            liveSave.innerText = input.value || "টাইপিং লাইভ...";
+            clearTimeout(timer);
+            timer = setTimeout(runTranslate, 300);
+        });
+
+        fromL.onchange = toL.onchange = runTranslate;
+
+        async function runTranslate() {
+            const val = input.value.trim();
+            if(!val) { output.innerText = "অনুবাদ..."; output.classList.remove('rtl'); return; }
+
+            // RTL লজিক (আরবি বা উর্দুর জন্য)
+            if(['ar', 'ur'].includes(toL.value)) output.classList.add('rtl');
+            else output.classList.remove('rtl');
+
+            try {
+                const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${fromL.value}&tl=${toL.value}&dt=t&q=${encodeURIComponent(val)}`);
+                const data = await res.json();
+                output.innerText = data[0].map(x => x[0]).join('');
+            } catch(e) { output.innerText = "Error..."; }
+        }
+
+        // ভাষা অদলবদল (Swap)
+        function swap() {
+            const temp = fromL.value;
+            fromL.value = toL.value;
+            toL.value = temp;
+            runTranslate();
+        }
+
+        function copy() {
+            navigator.clipboard.writeText(output.innerText);
+            alert("Copied!");
+        }
+
+        function speak() {
+            const utt = new SpeechSynthesisUtterance(output.innerText);
+            utt.lang = toL.value;
+            window.speechSynthesis.speak(utt);
+        }
+
+        function share(p) {
+            const txt = output.innerText;
+            if(txt === "অনুবাদ...") return;
+            if(p === 'wa') window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`);
+            else navigator.share({ text: txt }).catch(() => copy());
+        }
+    </script>
+</body>
+</html>
